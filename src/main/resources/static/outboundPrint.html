@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>仓储管理 出库打印-WarehouseManagement OutboundPrint</title>
+  <link href="./css/jquery-ui.css" rel="stylesheet"/>
+  <link href="./css/main.css" rel="stylesheet"/>
+  <link href="css/jquery.shCircleLoader.css" rel="stylesheet"/>
+  <style media=print>
+    .noPrint{
+      display:none;
+    }
+    .pageNext{page-break-after: always;}
+  </style>
+  <style>
+    html{
+      text-align: center;
+      font-size: 16px;
+    }
+    body{
+      height: 100%;
+    }
+    #shclDefault{
+      position: relative;
+      top: 50%;
+      left: 45%;
+      z-index: 1000;
+      width: 7rem;
+      height: 7rem;
+      color: #49a9ee;
+    }
+    #operationDiv{
+      margin: 1rem;
+    }
+    .printDiv{
+      text-align: left;
+      border: thin solid black;
+      margin-top: 1rem;
+    }
+    .packetID{
+      font-size: 3rem;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+    .packetTable{
+      border: thin solid black;
+      border-collapse: collapse;
+      font-size: 1rem;
+      text-align: center;
+      width: 100%;
+    }
+    .packetTable td{
+      border: thin solid black;
+      height: 1rem;
+    }
+    .bottomDiv{
+      width: 100%;
+      display: flex;
+    }
+    .bottom{
+      width: 50%;
+    }
+    #headTr{
+      border: thin solid black;
+      text-align: center;
+    }
+    .goodsTr{
+      border: thin solid black ;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div id="operationDiv" class="noPrint">
+  <button onclick="window.print()">打印</button>
+  <div id="loadingDialog" title="提示-Tips!">
+    <div id="shclDefault"></div>
+    <span></span>
+  </div>
+</div>
+
+<div class="bottomDiv">
+  <p class="bottom">有无异常-Whether abnormal：</p>
+  <p class="bottom">检查人-Inspector name：</p>
+</div>
+
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write('<script src="./js/jquery-3.2.1.min.js"><\/script>')</script>
+
+<script src="http://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>!window.jQuery.ui && document.write('<script src="./js/jquery-ui.min.js"><\/script>')</script>
+<script src="js/main.js"></script>
+<script src="./js/jquery.shCircleLoader-min.js"></script>
+<script>
+  $(function(){
+      $( "#loadingDialog" ).dialog({
+        autoOpen: false,
+        width: 400,
+        modal:true,
+        closeOnEscape: false,
+        dialogClass: "no-close"
+      });
+
+      $( "#loadingDialog" ).find("span").html("打印生成中，请稍等-Print is creating，please wait ......<br>注意：包裹较多时可能需要较长时间，请耐心等候！<br>Warn: the print information may too much to create in short time, please wait patiently!");
+      $( "#loadingDialog" ).dialog("open");
+      $('#shclDefault').shCircleLoader();
+
+      var res = JSON.parse(localStorage.getItem("outboundRes"));
+      /*var res = { backInfo :[
+       [ 12345678, "01101", [1,2,3,4,5],[2,3,4,5,6],[3,4,5,6,7] ],
+       [ 87654321, "01102", [4,5,6,7,8],[5,6,7,8,9],[6,7,8,9,0] ],
+       [ 87563214, "01103", [5,4,3,2,1],[6,5,4,3,2],[7,6,5,4,3] ]
+       ]};*/
+      console.log(res);
+      for(var i = 1;i < res.backInfo.length;i++) {
+          var isExist = false;
+          $(".packetID").each(function () {
+              if ($(this).html().substring(0,15) == "PackID：" + res.backInfo[i][0]) {
+                  isExist = true;
+              }
+          });
+          if (!isExist) {
+              var total = 0;
+              $(".bottomDiv").before("<div class='printDiv'> " +
+                  "<p class='packetID'>PackID：" + res.backInfo[i][0] + " <br>Post.：" + res.backInfo[i][1].substring(0, 2) + " - " + res.backInfo[i][1].substring(2, 5) + " </span><span style='font-size: 1rem'> Outbound：" + localStorage.getItem("outboundTime") +
+                  "</span></p>" +
+                  "<table class='packetTable'><tr id='headTr'><td>序号-No.</td><td>供应商-Supplier</td><td>款式-Style</td><td>颜色-Color</td><td>尺码-Size</td><td>数量-Number</td></tr></table><p></p></div>");
+              for (var n = 2; n < res.backInfo[i].length; n++) {
+                  $(".packetTable").last().find("tr").last().after("<tr>" +
+                      "<td>" + (n - 1) + "</td>" +
+                      "<td>" + res.backInfo[i][n][0] + "</td>" +
+                      "<td>" + res.backInfo[i][n][1] + "</td>" +
+                      "<td>" + res.backInfo[i][n][2] + "</td>" +
+                      "<td>" + res.backInfo[i][n][3] + "</td>" +
+                      "<td>" + res.backInfo[i][n][4] + "</td></tr>");
+                  total = total + Number(res.backInfo[i][n][4]);
+              }
+              $(".packetTable").last().find("tr").last().after("<tr>" +
+                  "<td>总计-Total</td>" +
+                  "<td></td>" +
+                  "<td></td>" +
+                  "<td></td>" +
+                  "<td></td>" +
+                  "<td>" + total + "</td></tr>");
+          }
+      }
+      $( "#loadingDialog" ).dialog("close");
+  });
+
+</script>
+</body>
+</html>

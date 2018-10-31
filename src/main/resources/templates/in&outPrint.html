@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>仓储管理 出入库打印-WarehouseManagement In&OutboundPrint</title>
+  <link href="./css/jquery-ui.css" rel="stylesheet"/>
+  <link href="./css/main.css" rel="stylesheet"/>
+  <style media=print>
+    .noPrint{
+      display:none;
+    }
+    .pageNext{page-break-after: always;}
+  </style>
+  <style>
+    html{
+      text-align: center;
+      font-size: 16px;
+    }
+    body{
+      height: 100%;
+    }
+    #operationDiv{
+      margin: 1rem;
+    }
+    #printDiv{
+      text-align: left;
+      border: thin solid black;
+    }
+    #packetID{
+      font-size: 3rem;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    #packetTable{
+      border: thin solid black;
+      border-collapse: collapse;
+      font-size: 1rem;
+      text-align: center;
+      width: 100%;
+    }
+    #packetTable td{
+      border: thin solid black;
+      height: 1rem;
+    }
+    #bottomDiv{
+      width: 100%;
+      display: flex;
+    }
+    .bottom{
+      width: 50%;
+    }
+    #headTr{
+      border: thin solid black;
+      text-align: center;
+    }
+    .goodsTr{
+      border: thin solid black ;
+      text-align: center;
+    }
+    #totalTr{
+      border: thin solid black ;
+      text-align: center;
+    }
+    .tdInput{
+      text-align: center;
+      border: none;
+      width: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+<div id="operationDiv" class="noPrint">
+  <button onclick="window.print()">打印</button>
+</div>
+
+<div id="printDiv">
+  <p id="packetID"></p>
+  <table id="packetTable"></table>
+  <div id="bottomDiv">
+    <p class="bottom">有无异常-Whether abnormal：</p>
+    <p class="bottom">检查人-Inspector name：</p>
+  </div>
+</div>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/jquery-ui.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+  $(function(){
+    function p(s) {
+      return s < 10 ? '0' + s: s;
+    }
+    var myDate = new Date();
+    var str = "" + myDate.getFullYear() + "-";
+    str += (myDate.getMonth()+1) + "-";
+    str += myDate.getDate() + "- ";
+    str += (p(myDate.getHours())+ ":");
+    str += p(myDate.getMinutes());
+
+    var thisURL = document.URL;
+    var param =thisURL.split("?")[1];
+    var direction= param.split("=")[1];
+    var total = null;
+
+    if(direction == "in"){
+      $("#packetID").html("PacketID："+localStorage.getItem("packetID") +"； Position：Shelf "
+          + localStorage.getItem("shelf") + " - " + localStorage.getItem("position") +"；<span style='font-size: 2rem'>Time："+ str +"</span>");
+      $("#packetTable").html(localStorage.getItem("packetTable"));
+      $(".goodsTr").find("input").each(function(){
+        total += parseInt($(this).val());
+      });
+      $("#totalTdInput").val(total);
+      $("#packetTable").find("input").prop("readonly",true);
+      $("#packetTable").find("tr").each(function(){
+        $(this).find("td").last().remove();
+      });
+    }else if(direction == "out"){
+      $("#packetID").html("PacketID："+localStorage.getItem("packetID") +"； Position：Shelf "
+          + localStorage.getItem("shelf") + " - " + localStorage.getItem("position") +"；<span style='font-size: 2rem'>Time："+ str +"</span>");
+      $("#packetTable").html(localStorage.getItem("packetTable"));
+      $(".goodsTr").find("input").each(function(){
+        total += parseInt($(this).val());
+      });
+      $("#totalTdInput").val(total);
+      $("#packetTable").find("input").prop("readonly",true);
+      $("#packetTable").find("tr").each(function(){
+        $(this).find("td").last().remove();
+      });
+    } else{
+      alert("null");
+    }
+
+
+  });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>仓储管理 货物查询-WarehouseManagement WareQuery</title>
+    <link href="./css/jquery-ui.css" rel="stylesheet"/>
+    <link href="./css/main.css" rel="stylesheet"/>
+    <link href="./css/chart.css" rel="stylesheet"/>
+    <link href="./css/query.css" rel="stylesheet"/>
+    <link href="./css/wareQuery.css" rel="stylesheet"/>
+    <link href="css/jquery.shCircleLoader.css" rel="stylesheet"/>
+    <style>
+        #shclDefault{
+            position: relative;
+            top: 50%;
+            left: 45%;
+            z-index: 1000;
+            width: 7rem;
+            height: 7rem;
+            color: #49a9ee;
+        }
+    </style>
+</head>
+<body>
+
+<div id="titleDiv">
+    <div id="title">
+        <span id="title1">仓储管理系统-Warehouse Management System</span>
+    </div>
+    <img id="user" src="./img/user.png" alt="用户-User"/>
+</div>
+<div id="pageDiv">
+    <div id="barDiv">
+        <ul style="width:100%;" id="menu">
+            <li ><div class="li">首页<br/>Home</div></li>
+            <li ><div class="li">查询<br/>Query</div>
+                <ul>
+                    <li><div>货物信息<br/>Wares Info.</div></li>
+                    <li><div>出入库记录<br/>In&Outbound REC.</div></li>
+                </ul>
+            </li>
+            <li ><div class="li">入库<br/>Inbound</div></li>
+            <li ><div class="li">出库<br/>Outbound</div></li>
+            <li ><div class="li">盘点<br/>Check</div>
+                <ul>
+                    <li><div>全部货架<br/>All Shelf</div></li>
+                    <li><div>变动位置<br/>Changed Post.</div></li>
+                </ul>
+            </li>
+            <li ><div class="li">管理<br/>Management</div>
+                <ul>
+                    <li><div>货物<br/>Ware</div>
+                        <ul>
+                            <li><div>供应商<br/>Supplier</div></li>
+                            <li><div>款式<br/>Style</div></li>
+                            <li><div>颜色<br/>Color</div></li>
+                            <li><div>尺码<br/>Size</div></li>
+                        </ul>
+                    </li>
+                    <li><div>货架<br/>Shelf</div>
+                        <ul>
+                            <li><div>货架管理<br/>management</div></li>
+                            <li><div>货架扩容<br/>Expansion</div></li>
+                        </ul>
+                    </li>
+                    <li><div>人员<br/>Staff</div>
+                        <ul>
+                            <li><div>库管<br/>Manager</div></li>
+                            <li><div>普通<br/>Employee</div></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div id="mainDiv">
+        <span id="word1">查询-Query /  </span>
+        <span id="word2">货物查询-WareQuery</span>
+        <div id="main">
+            <div id="condition">
+                <span id="outboundCheckSpan" class="extraAuthority">
+                    <input id="outboundCheckbox" type="checkbox"/>
+                    <label for="outboundCheckbox">查询已出库货物-Query Outbound Wares</label>
+                </span>
+                <span id="idInputSpan">
+                    <input id="packetIdInput" class="name" type="text" placeholder="包裹ID-PacketID"/>
+                </span>
+                <span id="del1" type="button"><img class="add" src="./img/add.png" alt="添加Add"></span>
+                <div>
+                    <div class="queryDiv">
+                        <select class="modelNoSelect">
+                            <option selected value="null">模版-Model No.</option>
+                        </select>
+                        <select class="departmentSelect">
+                            <option selected value="null">系列-Department</option>
+                        </select>
+                        <select class="brandSelect">
+                            <option selected value="null">品牌-Brand</option>
+                        </select>
+                        <select class="fittingSelect">
+                            <option selected value="null">型号-Fitting</option>
+                        </select>
+                        <br>
+                        <select style="visibility:hidden;"></select>
+                        <select class="supplierSelect">
+                            <option selected value="null">供应商-Supplier</option>
+                        </select>
+                        <select class="sizeSelect">
+                            <option selected value="null">尺码-Size</option>
+                        </select>
+                        <select class="colorSelect">
+                            <option selected value="null">颜色-Color</option>
+                        </select>
+                    </div>
+                </div>
+            <button id="wareQuery">查询-Query</button>
+            </div>
+                <table id="tab" >
+                <tr id="t1">
+                    <td>序号-No</td>
+                    <td>包裹-ID</td>
+                    <td>模版-Model No.</td>
+                    <td>系列-Department</td>
+                    <td>品牌-Brand</td>
+                    <td>型号-Fitting</td>
+                    <td>供应商-Supplier</td>
+                    <td>尺码-Size</td>
+                    <td>颜色-Color</td>
+                    <td>位置-Position</td>
+                    <td id="timeTd">入库时间-InboundTime</td>
+                    <td>数量-Number</td>
+                </tr>
+                <!-- <tr class="t2">
+                    <td>1</td>
+                    <td>102011</td>
+                    <td>李维斯512</td>
+                    <td>S</td>
+                    <td>深蓝</td>
+                    <td>A101</td>
+                    <td>2017.4.7 15:35</td>
+                    <td>10</td>
+                </tr> -->
+            </table>
+
+        </div>
+    </div>
+    <div id="tipDiv" title="提示-Tips！">
+        <p></p>
+    </div>
+    <div id="logoutDiv" title="注销确定-Logout Confirm！">
+        <p>您确定要注销并返回登录页面吗？</p>
+        <p>Are you sure to logout and go to the login page?</p>
+    </div>
+    <div id="loadingDialog" title="提示-Tips!">
+        <div id="shclDefault"></div>
+        <span></span>
+    </div>
+</div>
+
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write('<script src="./js/jquery-3.2.1.min.js"><\/script>')</script>
+
+<script src="http://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>!window.jQuery.ui && document.write('<script src="./js/jquery-ui.min.js"><\/script>')</script>
+<script src="./js/main.js"></script>
+<script src="./js/jquery.shCircleLoader-min.js" type="text/javascript"></script>
+<script src="./js/query.js"></script>
+<script>
+
+</script>
+</body>
+</html>

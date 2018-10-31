@@ -1,0 +1,113 @@
+
+#name{
+    border: 0.1rem solid #d4d4d9;
+    border-radius: 0.2rem;
+    outline: none;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.8rem;
+    width:8rem;
+    color:#a0a0a0;
+    height:1.0rem;
+    position: relative;
+    margin-left: 2rem;
+}
+.name{
+    border: 0.1rem solid #d4d4d9;
+    border-radius: 0.2rem;
+    outline: none;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.8rem;
+    width:8rem;
+    /*color:#a0a0a0;*/
+    height:1.0rem;
+    position: relative;
+    margin-left: 2rem;
+}
+.size{
+    border: 0.1rem solid #d4d4d9;
+    border-radius: 0.2rem;
+    outline: none;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.8rem;
+    color:#a0a0a0;
+    height:1.0rem;
+    width:6rem;
+    position: relative;
+    margin-left: 0.5rem;
+}
+.word3{
+    font-size: 0.9rem;
+    position: relative;
+    margin-left: 4.9rem;
+}
+#btn1{
+    color: white;
+    background-color: #49a9ee ;
+    border: none;
+    border-radius: 0.2rem;
+    width: 5rem;
+    height: 2rem;
+    min-width: 5rem;
+    position: relative;
+    margin-left: 0.5rem;
+}
+#tab{
+    border: solid #ecf6fd thin;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    height:2.5rem;
+    width:95%;
+    position: relative;
+    left:2.5%;
+    right:2.5%;
+    text-align: center;
+
+}
+#t1{
+    border: solid #ecf6fd thin;
+    border-collapse: collapse;
+    background-color: #ecf6fd;
+    font-size: 0.9rem;
+    line-height:2.5rem;
+    width:95%;
+    position: relative;
+    left:2.5%;
+    right:2.5%;
+    text-align: center;
+}
+.t2{
+    border: solid #ecf6fd thin;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    line-height:2.5rem;
+    width:95%;
+    position: relative;
+    left:2.5%;
+    right:2.5%;
+    text-align: center;
+}
+#info{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+#delete{
+    width:1.5rem;
+    height:1.5rem;
+    position: relative;
+    top: 0.4rem;
+}
+#print{
+     width:1.5rem;
+     height:1.5rem;
+     position: relative;
+     top: 0.4rem;
+ }
+#eil{
+    width:1.5rem;
+    height:1.5rem;
+    position: relative;
+    top: 0.4rem;
+}
+#printAll{
+
+}

@@ -1,0 +1,21 @@
+.close{
+    display: none;
+}
+.toggleTd{
+    cursor: pointer;
+}
+.revoke{
+    width:1.5rem;
+    height:1.5rem;
+    position: relative;
+    top: 0.4rem;
+}
+#condition{
+    padding: 1rem 0.5rem 0.5rem 0;
+}
+#mainDiv{
+	overflow: hidden;
+}
+#main{
+	overflow: auto;
+}

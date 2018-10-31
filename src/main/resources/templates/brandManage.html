@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>仓储管理 货物品牌-WarehouseManagement WareBrand</title>
+    <link href="./css/jquery-ui.css" rel="stylesheet"/>
+    <link href="./css/main.css" rel="stylesheet"/>
+    <link href="css/chart.css" rel="stylesheet"/>
+    <style>
+        .delete{
+            width:1.5rem;
+            height:1.5rem;
+            position: relative;
+            top: 0.4rem;
+        }
+        .input {
+            border: 0.1rem solid #d4d4d9;
+            border-radius: 0.2rem;
+            outline: none;
+            padding: 0.3rem 0.5rem;
+            font-size: 0.8rem;
+            width: 8rem;
+            color: black;
+            height: 1.0rem;
+            position: relative;
+            margin-left: 0.5rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+<div id="titleDiv">
+    <div id="title">
+        <span id="title1">仓储管理系统-Warehouse Management System</span>
+    </div>
+    <img id="user" src="./img/user.png" alt="用户-User"/>
+</div>
+<div id="pageDiv">
+    <div id="barDiv">
+        <ul style="width:100%;" id="menu">
+            <li ><div class="li">首页<br/>Home</div></li>
+            <li ><div class="li">查询<br/>Query</div>
+                <ul>
+                    <li><div>货物信息<br/>Wares Info.</div></li>
+                    <li><div>出入库记录<br/>In&Outbound REC.</div></li>
+                </ul>
+            </li>
+            <li ><div class="li">入库<br/>Inbound</div></li>
+            <li ><div class="li">出库<br/>Outbound</div></li>
+            <li ><div class="li">盘点<br/>Check</div>
+                <ul>
+                    <li><div>全部货架<br/>All Shelf</div></li>
+                    <li><div>变动位置<br/>Changed Post.</div></li>
+                </ul>
+            </li>
+            <li ><div class="li">管理<br/>Management</div>
+                <ul>
+                    <li><div>货物<br/>Ware</div>
+                        <ul>
+                            <li><div>供应商<br/>Supplier</div></li>
+                            <li><div>款式<br/>Style</div></li>
+                            <li><div>颜色<br/>Color</div></li>
+                            <li><div>尺码<br/>Size</div></li>
+                        </ul>
+                    </li>
+                    <li><div>货架<br/>Shelf</div>
+                        <ul>
+                            <li><div>货架管理<br/>management</div></li>
+                            <li><div>货架扩容<br/>Expansion</div></li>
+                        </ul>
+                    </li>
+                    <li><div>人员<br/>Staff</div>
+                        <ul>
+                            <li><div>库管<br/>Manager</div></li>
+                            <li><div>普通<br/>Employee</div></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div id="mainDiv">
+        <span id="word1">管理-Manege / 货物-Ware / </span>
+        <span id="word2">品牌-Brand</span>
+        <div id="main">
+            <span class="infoSpan">品牌-中文:</span><input id="brandCh" class="input" type="text" placeholder="品牌-中文"/>
+            <span class="infoSpan">Brand-English:</span><input id="brand" class="input" type="text" placeholder="Brand-English"/>
+            <button id="addBtn" class="addBtn">添加-Add</button>
+            <table id="tab" >
+                <tr id="t1">
+                    <td>序号-No</td>
+                    <td>品牌-Brand</td>
+                    <td>删除-Delete</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="delDialog" title="请确认操作！-Please confirm your operation!">
+        <p>您确定要删除该信息吗？<br>Are you sure to delete?</p>
+    </div>
+    <div id="exDialog" title="提醒！-Warn!">
+        <p>已存在<br>Already exist</p>
+    </div>
+    <div id="enDialog" title="提醒！-Warn!">
+        <p>请输入品牌<br>Please enter brand in English</p>
+    </div>
+    <div id="chDialog" title="提醒！-Warn!">
+        <p>请输入品牌<br>Please enter brand in Chinese</p>
+    </div>
+    <div id="logoutDiv" title="注销确定-Logout Confirm！">
+        <p>您确定要注销并返回登录页面吗？</p>
+        <p>Are you sure to logout and go to the login page?</p>
+    </div>
+</div>
+
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write('<script src="./js/jquery-3.2.1.min.js"><\/script>')</script>
+
+<script src="http://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>!window.jQuery.ui && document.write('<script src="./js/jquery-ui.min.js"><\/script>')</script>
+<script src="./js/main.js"></script>
+<script src="./js/brand.js"></script>
+
+
+<script>
+    $("#del1").click(function (){
+        if(confirm("确认操作？"))
+            $(this).parent().remove();
+    });
+</script>
+</body>
+</html>

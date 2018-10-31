@@ -1,0 +1,46 @@
+input{
+    width: 5rem;
+}
+#main{
+    overflow: auto;
+}
+#ui-datepicker-div{
+    font-size: 0.8rem;
+}
+#chartDiv{
+    width: 97%;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.chart{
+    margin: 1rem 1rem 0;
+}
+#dataSpan{
+    position: absolute;
+    margin-left: 1rem;
+    z-index: 1;
+}
+#submit{
+    color: white;
+    background-color: #49a9ee ;
+    border: none;
+    border-radius: 0.2rem;
+    height: 2rem;
+    min-width: 5rem;
+    position: relative;
+}
+#pieDiv{
+    display: flex;
+    justify-content: space-around;
+}
+#pieOverloadDiv{
+    width: 25rem;
+    height: 25rem;
+    position: relative;
+    top: 2.5rem;
+}
+#modelNoSpan{
+    margin-left: 1rem;
+}

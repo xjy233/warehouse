@@ -1,0 +1,234 @@
+/*--------------------------------------------*/
+img {
+  cursor: pointer;
+}
+button{
+  cursor: pointer;
+  color: white;
+  background-color: #49a9ee ;
+  border: none;
+  border-radius: 0.2rem;
+  height: 2rem;
+  min-width: 5rem;
+}
+html{
+  font-size: 100%;
+  height: 100%;
+  width: 100%;
+  display: none;
+  font-family: 微软雅黑;
+}
+body{
+  height: 100%;
+  width: 100%;
+  margin: 0 ;
+}
+div{
+  margin: 0;
+}
+/*----------------------------------------------------*/
+#titleDiv{
+  border:#49a9ee thin solid;
+  width: 99.9%;
+  height: 10%;
+  background-color:#49a9ee;
+  display: flex;
+  justify-content: space-between;
+}
+#title{
+  margin-left:2rem;
+}
+#title1{
+  color:white;
+  font-size: 1.5rem;
+  position: absolute;
+  top:1rem;
+}
+#title2{
+  color:white;
+  font-size: 0.5rem;
+  position: absolute;
+  top:2.8rem;
+}
+#user{
+  width:2rem;
+  height:2rem;
+  position: relative;
+  top:0.7rem;
+  margin-right:2rem;
+}
+#logout{
+  width:2rem;
+  height:2rem;
+  position: relative;
+  top: 0.7rem;
+  right: 1rem;
+}
+#pageDiv{
+  border: #ecf6fd thin solid;
+  width: 99.9%;
+  height: 89%;
+  display: flex;
+  background-color: #ecf6fd;
+}
+
+#barDiv{
+  border:white thin solid;
+  width: 10%;
+  background-color: white;
+  margin:0.5rem 0.5rem;
+}
+#menu{
+  background-color:white;
+  border:white thin solid;
+  display: none;
+}
+li{
+  background-color:white;
+  border:white thin solid;
+  font-size: 0.9rem;
+  text-align: center;
+}
+.li{
+  height:2.5rem;
+}
+#mainDiv{
+  border: #ecf6fd thin solid;
+  width: 90%;
+  height:94%;
+  padding: 0.5rem;
+  overflow: hidden;
+  margin:0.5rem 0.2rem;
+}
+#word1{
+  color:#a0a0a0;
+  font-size: 0.8rem;
+  position: relative;
+  bottom:0.2rem;
+}
+#word2{
+
+  font-size: 0.8rem;
+  position: relative;
+  bottom:0.2rem;
+}
+#main{
+  height:96%;
+  width:100%;
+  background-color: white;
+  overflow: auto;
+}
+.shelfDiv{
+  height: 90%;
+  overflow: auto;
+  padding: 0.5rem 0.5rem 0.5rem 0.2rem;
+  position: relative;
+  z-index: 5;
+}
+.shelfTable{
+  border: 0.5rem solid #49a9ee;
+  border-spacing: 0;
+  border-radius: 0.5rem;
+  table-layout: fixed;
+  box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem grey;
+  height: 100%;
+  min-width: 100%;
+  position: relative;
+  z-index: 10;
+}
+.shelfTable td{
+  border: thin solid #49a9ee;
+  box-shadow: 0 0 0.2rem 0 #49a9ee inset;
+  width: 10rem;
+  height:5.5rem;
+}
+.shelfTable td:hover{
+  border: thin solid yellow;
+}
+.footDiv{
+  display: flex;
+  justify-content: space-around;
+  height: 1rem;
+}
+.footSpan{
+  height: 1.6rem;
+  width: 5rem;
+  background-color: #49a9ee;
+  box-shadow: 0.1rem 0.1rem 0.5rem 0.1rem grey;
+  position: relative;
+  bottom: 0.5rem;
+  z-index: 10;
+}
+#packetDiv{
+  background-color: white;
+}
+.packetTable{
+  border: thin solid;
+}
+.packetTable td{
+  border: thin solid;
+  padding: 0.2rem;
+}
+.useDiv{
+  height: 100%;
+}
+.useDiv span{
+  display: block;
+}
+.fractionSpan{
+  position: absolute;
+  text-align: center;
+}
+.restSpan{
+
+}
+.usedSpan{
+  background-color: white;
+}
+.inputSpan{
+  display: block;
+  margin: 1rem;
+}
+.ui-button{
+  font-size: 0.8rem;
+}
+.ui-dialog{
+  font-size: 0.8rem;
+}
+.no-close .ui-dialog-titlebar-close {
+  display: none;
+}
+.ui-selectmenu-button{
+  font-size: 0.8rem;
+}
+.ui-selectmenu-menu{
+  font-size: 0.8rem;
+}
+select{
+  border: 0.1rem solid #d4d4d9;
+  border-radius: 0.7rem;
+  outline: none;
+  padding: 0.3rem 0.5rem;
+  margin: 0.1rem;
+  font-size: 0.8rem;
+  width:8rem;
+  margin-left: 0.5rem;
+}
+.button{
+  color: white;
+  background-color: #49a9ee ;
+  border: none;
+  border-radius: 0.2rem;
+  height: 2rem;
+  position: relative;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.infoSpan{
+  margin-left:2rem;
+}
+.ui-widget-overlay{
+  background-image: none;
+  background-color: #f3f3f3;
+}

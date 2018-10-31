@@ -1,0 +1,53 @@
+.add{
+    width:1.6rem;
+    height:1.5rem;
+    position: relative;
+    top: 0.8rem;
+    left: 0.5rem;
+}
+.queryDiv{
+    margin: 0.5rem 0.5rem 0.5rem 0;
+}
+#outboundCheckSpan{
+    padding-top: 0.8rem;
+}
+#ui-datepicker-div{
+    font-size: 0.8rem;
+}
+.name{
+    color: black;
+}
+.print{
+    width:1.5rem;
+    height:1.5rem;
+    position: relative;
+    top: 0.4rem;
+}
+.packetTr{
+    cursor: pointer;
+}
+#wareQuery{
+    margin-top: 0.5rem;
+    position: relative;
+    right: 1rem;
+}
+#supplierSelect{
+    margin-left:4.9rem;
+}
+#mainDiv{
+    overflow-y: hidden;
+}
+#main{
+    overflow-y: auto;
+}
+#idInputSpan{
+    display: flex;
+    align-items: flex-start;
+    margin-top: 0.6rem;
+}
+#condition{
+    padding: 0.5rem;
+}
+select{
+    width:8.5rem;
+}

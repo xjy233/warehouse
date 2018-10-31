@@ -1,0 +1,29 @@
+.manege{
+   padding:1rem  2rem 0rem;
+}
+#save{
+    margin-left:0.5rem;
+}
+.reset{
+    width:1.5rem;
+    height:1.5rem;
+    position: relative;
+    top: 0.4rem;
+}
+.ui-widget-shadow{
+    box-shadow: 0 0 0 0;
+    -webkit-box-shadow: 0 0 0 0;
+}
+.ui-tooltip{
+    font-size: 1rem;
+}
+.delete{
+    width:1.5rem;
+    height:1.5rem;
+    position: relative;
+    top: 0.4rem;
+}
+.word{
+    padding-top:0.5rem;
+    padding-bottom:0.5rem;
+}

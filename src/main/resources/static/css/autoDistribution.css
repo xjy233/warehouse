@@ -1,0 +1,34 @@
+#next{
+    color: white;
+    background-color: #49a9ee ;
+    border: none;
+    border-radius: 0.2rem;
+    width: 5rem;
+    height: 2rem;
+    min-width: 5rem;
+
+}
+#back{
+    color: white;
+    background-color: #49a9ee ;
+    border: none;
+    border-radius: 0.2rem;
+    width: 5rem;
+    height: 2rem;
+    min-width: 5rem;
+
+}
+#print{
+    color: white;
+    background-color: #49a9ee ;
+    border: none;
+    border-radius: 0.2rem;
+    width: 5rem;
+    height: 2rem;
+    min-width: 5rem;
+}
+#buttontwo{
+    display: flex;
+    justify-content: space-between;
+    padding:0.5rem 2rem;
+}

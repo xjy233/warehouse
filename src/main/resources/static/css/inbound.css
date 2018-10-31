@@ -1,0 +1,149 @@
+#main{
+    overflow-y: scroll;
+    padding-left: 0.5rem;
+}
+.ui-widget-shadow{
+    box-shadow: 0 0 0 0;
+    -webkit-box-shadow: 0 0 0 0;
+}
+.ui-selectmenu-button.ui-button{
+    width: 5rem;
+    margin-right: 1rem;
+}
+.ui-selectmenu-menu{
+    font-size: 0.8rem;
+}
+#goodsDiv{
+    border-top: thin solid grey;
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+}
+#addButton{
+    height: 2.5rem;
+    width: 5rem;
+}
+#detailsTable{
+    border: thin solid #ecf6fd;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    height:2.5rem;
+    width:95%;
+    position: relative;
+    left:2.5%;
+    right:2.5%;
+    text-align: center;
+}
+#headTr{
+    border: thin solid #ecf6fd;
+    background-color: #ecf6fd;
+    font-size: 0.9rem;
+    line-height:2.5rem;
+    position: relative;
+    left:2.5%;
+    right:2.5%;
+    text-align: center;
+}
+.goodsTr{
+    border: thin solid #ecf6fd ;
+    font-size: 0.9rem;
+    line-height:2.5rem;
+    width:95%;
+    position: relative;
+    left:2.5%;
+    right:2.5%;
+    text-align: center;
+}
+.goodsTr input{
+    background-color: transparent;
+}
+#totalTr{
+    border: thin solid #ecf6fd ;
+    font-size: 0.9rem;
+    line-height:2.5rem;
+    width:95%;
+    position: relative;
+    left:2.5%;
+    right:2.5%;
+    text-align: center;
+}
+.delSpan{
+    text-decoration: underline;
+    cursor: pointer;
+}
+#delAllSpan{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.tdInput{
+    text-align: center;
+    border: none;
+    width: 3rem;
+}
+#totalTdInput{
+    color: red;
+}
+#positionDiv{
+    border-top: thin solid grey;
+}
+#positionInput{
+    width: 13rem;
+}
+.ui-tooltip{
+    font-size: 1rem;
+}
+#autoResultDiv{
+    padding: 0 1rem 1rem;
+}
+#customResultDiv{
+    padding: 1rem;
+}
+#shelfSelect-button{
+    width: 13.3rem;
+}
+#operationDiv{
+    border-top: thin solid grey;
+    padding-top: 0.5rem;
+    display: flex;
+    justify-content: space-around;
+}
+.positionText{
+    color: red;
+}
+.conditionDiv{
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+.conditionDiv input{
+    width: 5rem;
+}
+img{
+    height: 1.5rem;
+    width: 1.5rem;
+    position: relative;
+    top: 0.4rem;
+}
+#usageWarnDiv{
+    font-size: 0.9rem;
+    color: white;
+    display: block;
+    border: thin solid white;
+    background-color: #3dbd7d;
+    border-radius: 5rem;
+    height: 6rem;
+    width: 7.5rem;
+    padding-top: 1.5rem;
+    text-align: center;
+    margin-top: 6rem;
+    margin-left: 0.8rem;
+}
+.button{
+    cursor: pointer;
+    color: white;
+    background-color: #49a9ee ;
+    border: none;
+    border-radius: 0.2rem;
+    height: 2.5rem;
+}
+#autoResultP{
+    margin: 0.5rem 1rem;
+}

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>仓储管理 个人信息-WarehouseManagement PersonalInfo.</title>
+    <link href="./css/jquery-ui.css" rel="stylesheet"/>
+    <link href="./css/main.css" rel="stylesheet"/>
+    <link href="css/chart.css" rel="stylesheet"/>
+    <link href="css/personalInfo.css" rel="stylesheet"/>
+    <style>
+    </style>
+</head>
+<body>
+<div id="titleDiv">
+    <div id="title">
+    <span id="title1">仓储管理系统-Warehouse Management System</span>
+    </div>
+    <img id="user" src="./img/user.png" alt="用户-User"/>
+</div>
+<div id="pageDiv">
+    <div id="barDiv">
+        <ul style="width:100%;" id="menu">
+            <li ><div class="li">首页<br/>Home</div></li>
+            <li ><div class="li">查询<br/>Query</div>
+                <ul>
+                    <li><div>货物信息<br/>Wares Info.</div></li>
+                    <li><div>出入库记录<br/>In&Outbound REC.</div></li>
+                </ul>
+            </li>
+            <li ><div class="li">入库<br/>Inbound</div></li>
+            <li ><div class="li">出库<br/>Outbound</div></li>
+            <li ><div class="li">盘点<br/>Check</div>
+                <ul>
+                    <li><div>全部货架<br/>All Shelf</div></li>
+                    <li><div>变动位置<br/>Changed Post.</div></li>
+                </ul>
+            </li>
+            <li ><div class="li">管理<br/>Management</div>
+                <ul>
+                    <li><div>货物<br/>Ware</div>
+                        <ul>
+                            <li><div>供应商<br/>Supplier</div></li>
+                            <li><div>款式<br/>Style</div></li>
+                            <li><div>颜色<br/>Color</div></li>
+                            <li><div>尺码<br/>Size</div></li>
+                        </ul>
+                    </li>
+                    <li><div>货架<br/>Shelf</div>
+                        <ul>
+                            <li><div>货架新增<br/>Increase</div></li>
+                            <li><div>货架扩容<br/>Expansion</div></li>
+                        </ul>
+                    </li>
+                    <li><div>人员<br/>Staff</div>
+                        <ul>
+                            <li><div>库管<br/>Manager</div></li>
+                            <li><div>普通<br/>Employee</div></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div id="mainDiv">
+        <span id="word2">个人信息-PersonalInformation</span>
+        <div id="main">
+            <div class="line">
+                <!--<span>*账号-Account No.</span>-->
+                <!--<input id="account" class="personalInfo" type="text" readonly="readonly" >-->
+                <!--<br/>-->
+                <span style="padding-left:3.5rem;" >*邮箱-Email</span>
+                <input id="email" class="personalInfo" type="email" onkeyup="this.value=this.value.replace(/\s+/g,'')" style=" margin-top: 1rem;">
+                <br/>
+                <span>*旧密码-Current Password</span>
+                <input  id="CurrentP" class="personalInfo" type="password" onkeyup="this.value=this.value.replace(/\s+/g,'')" style="margin-right:3.5rem; margin-top: 1rem;" >
+                <br/>
+                <br/>
+                <span style="font-size:0.5rem; color:#49a9ee;">密码长度至少8位，请包涵字母，数字，字符。</span>
+                <br/>
+                <span style="font-size:0.5rem; color:#49a9ee;">The pwd must be more than 8bits which contains letters,numbers and special characters.</span>
+                <br/>
+                <span >新密码-New Password</span>
+                <input id="NewP"class="personalInfo" type="password" onkeyup="this.value=this.value.replace(/\s+/g,'')" style=" margin-right:1.5rem;margin-top: 1rem;">
+                <br/>
+                <span>新密码确认-Confirm New Pwd</span>
+                <input id="NewPC"  class="personalInfo" type="password" onkeyup="this.value=this.value.replace(/\s+/g,'')" style=" margin-right:5.5rem;margin-top: 1rem;">
+            </div>
+            <div class="btn">
+                <button id="save">保存Save</button>
+                <button id="Cancle">取消Cancle</button>
+            </div>
+        </div>
+        <div id="sucDialog" title="提醒！-Warn!">
+            <p>操作成功！<br>Success!</p>
+        </div>
+        <div id="errDialog" title="提醒！-Warn!">
+            <p>密码不正确！<br>The password is incorrect!</p>
+        </div>
+        <div id="logoutDiv" title="注销确定-Logout Confirm！">
+            <p>您确定要注销并返回登录页面吗？</p>
+            <p>Are you sure to logout and go to the login page?</p>
+        </div>
+        <div id="eightDialog" title="提醒！-Warn!">
+            <p>密码长度不能小于8位！<br>Password length cannot be less than 8 bits!</p>
+        </div>
+        <div id="containDialog" title="提醒！-Warn!">
+            <p>密码必须由数字,字母,特殊符号组成！<br>Password must consist of letters,numbers and special symbols.</p>
+        </div>
+        <div id="matchDialog" title="提醒！-Warn!">
+            <p>新密码不一致！<br>New password doesn't match！.</p>
+        </div>
+        <div id="tipDiv" title="提示-Tips！">
+            <p></p>
+        </div>
+    </div>
+</div>
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write('<script src="./js/jquery-3.2.1.min.js"><\/script>')</script>
+
+<script src="http://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>!window.jQuery.ui && document.write('<script src="./js/jquery-ui.min.js"><\/script>')</script>
+<script src="./js/main.js"></script>
+<script src="./js/personalInfo.js"></script>
+<script>
+</script>
+</body>
+</html>

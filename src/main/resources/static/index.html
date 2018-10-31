@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--<meta http-equiv="cache-control" content="max-age=7200" />-->
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>仓储管理 登陆-login</title>
+    <link href="./css/jquery-ui.css" rel="stylesheet">
+    <link href="./css/index.css" rel="stylesheet"/>
+    <link href="css/jquery.shCircleLoader.css" rel="stylesheet"/>
+    <style type="text/css">
+        body {
+            background-image:url(./img/background.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        #shclDefault{
+            position: relative;
+            top: 50%;
+            left: 45%;
+            z-index: 1000;
+            width: 7rem;
+            height: 7rem;
+            color: #49a9ee;
+        }
+    </style>
+
+</head>
+<body>
+<div id="main">
+<div id="white">
+    <img src="./img/login.png" alt="登陆log" id="log">
+    <div id="content">
+        <span id="word1">仓储管理系统</span>
+        <span id="word2">Warehouse Manegement System</span>
+        <form action="/login" method="post">
+            <input class="loginInput" id="account" type="text" placeholder="账号-Account No." name="username">
+            <input class="loginInput" id="password" type="password" placeholder="密码-Password" name="password">
+            <button class="loginButton" id="loginbtn" type="submit">登陆Login</button>
+        </form>
+        <span id="findSpan">找回密码</span>
+    </div>
+</div>
+
+</div>
+<div id="dialog" title="请输入帐号或工号-Enter your account or empno!">
+    <p>
+        帐号或工号-Account or Empno:<input id="accountInput" type="text" placeholder="账号-Account No." name="username">
+    </p>
+</div>
+<div id="tipDiv" title="提示-Tips！">
+    <p></p>
+</div>
+<div id="loadingDialog" title="提示-Tips!">
+    <div id="shclDefault"></div>
+    <span></span>
+</div>
+
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write('<script src="./js/jquery-3.2.1.min.js"><\/script>')</script>
+
+<script src="http://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>!window.jQuery.ui && document.write('<script src="./js/jquery-ui.min.js"><\/script>')</script>
+
+<script src="./js/jquery.shCircleLoader-min.js"></script>
+<script src="./js/index.js"></script>
+<!--<script src="./js/crypto-js.js"></script>-->
+</body>
+</html>

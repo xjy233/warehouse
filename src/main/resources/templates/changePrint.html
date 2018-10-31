@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>仓储管理 变动盘点打印-WarehouseManagement ChangedPost.Print</title>
+  <link href="./css/jquery-ui.css" rel="stylesheet"/>
+  <link href="./css/main.css" rel="stylesheet"/>
+  <link href="css/jquery.shCircleLoader.css" rel="stylesheet"/>
+  <style media=print>
+    .noPrint{
+      display:none;
+    }
+    .pageNext{page-break-after: always;}
+  </style>
+  <style>
+    html{
+      text-align: center;
+      font-size: 16px;
+    }
+    body{
+      height: 100%;
+    }
+    #shclDefault{
+      position: relative;
+      top: 50%;
+      left: 45%;
+      z-index: 1000;
+      width: 7rem;
+      height: 7rem;
+      color: #49a9ee;
+    }
+    #operationDiv{
+      margin: 1rem;
+    }
+    .printDiv{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .rowDiv{
+      width: 100%;
+      border: thin solid black;
+      margin: 0.2rem;
+    }
+    .packetID{
+      text-align: left;
+      display: flex;
+      justify-content: space-around;
+    }
+    .bottomDiv{
+      width: 100%;
+      display: flex;
+    }
+    .bottom{
+      width: 50%;
+    }
+    .packetTable{
+      border: thin solid black;
+      border-collapse: collapse;
+      font-size: 1rem;
+      text-align: center;
+      table-layout: fixed;
+      width: 100%;
+    }
+    #packetTable td{
+      border: thin solid black;
+      height: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<div id="operationDiv" class="noPrint">
+  <button onclick="window.print()">打印</button>
+  <div id="loadingDialog" title="提示-Tips!">
+    <div id="shclDefault"></div>
+    <span></span>
+  </div>
+</div>
+
+<div id="modalDiv" style="display: none">
+  <p class="packetID">
+    Shelf：<span></span> Post.：<span></span> PrintTime：<span></span>
+  </p>
+  <table class="packetTable">
+  </table>
+  <div class="bottomDiv">
+    <p></p>
+    <!--<p class="bottom">有无异常：</p>-->
+    <!--<p class="bottom">检查人：</p>-->
+  </div>
+</div>
+
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write('<script src="./js/jquery-3.2.1.min.js"><\/script>')</script>
+
+<script src="http://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>!window.jQuery.ui && document.write('<script src="./js/jquery-ui.min.js"><\/script>')</script>
+<script src="./js/main.js"></script>
+<script src="./js/jquery.shCircleLoader-min.js"></script>
+<script>
+  $(function(){
+
+    $( "#loadingDialog" ).dialog({
+      autoOpen: false,
+      width: 400,
+      modal:true,
+      closeOnEscape: false,
+      dialogClass: "no-close"
+    });
+
+    $( "#loadingDialog" ).find("span").html("打印生成中，请稍等-Print is creating，please wait ......<br>注意：包裹较多时可能需要较长时间，请耐心等候！<br>Warn: the print information may too much to create in short time, please wait patiently!");
+    $( "#loadingDialog" ).dialog("open");
+    $('#shclDefault').shCircleLoader();
+
+    $.ajax({
+      type: "POST",
+      url: "/AllCheck/backChangePac",
+      dataType: "json",
+      data: {
+      },
+      success: function (res) {
+        $( "#loadingDialog" ).dialog("close");
+        console.log(res);
+        var positionList = [];
+        for(var i = 1;i < res.allPac.length;i++){
+        	var isExist = false;
+        	for(var n = 0;n < positionList.length;n++){
+        		if(res.allPac[i][1] == positionList[n]){
+        			isExist = true;
+        		}
+        	}
+        	if(!isExist){
+        		positionList.push(res.allPac[i][1]);
+        	}
+        }
+        
+        console.log(positionList);
+        for(var i = 0;i < positionList.length;i++){
+          $("#modalDiv").before("<div class='printDiv'><div class='rowDiv'>"+$("#modalDiv").html()+"</div></div>");
+        }
+        for(var i = 0;i < positionList.length;i++){
+          var shelfNum = null;
+          var positionId = null;
+          if(isNaN(positionList[i])) {
+            shelfNum = positionList[i].substring(0, 2);
+          }else{
+            shelfNum = parseInt(positionList[i] / 1000);
+          }
+          if(isNaN(positionList[i])) {
+            positionId = positionList[i].substring(1,4);
+          }else{
+            positionId = parseInt(positionList[i] % 1000);
+          }
+          $(".packetID").eq(i).find("span").eq(0).text(positionList[i].substring(0, 2));
+          $(".packetID").eq(i).find("span").eq(1).text(positionId);
+        }
+        $(".packetID").each(function(){
+          $(this).find("span").eq(2).html(res.allPac[0]);
+        });
+        $(".packetTable").empty();
+        for(var a = 1;a < res.allPac.length;a++){
+          $(".packetID").each(function(){
+            $(this).find("span").eq(1).each(function(){
+              var position = res.allPac[a][1] % 1000;
+              if($(this).html() == position && $(this).parent().find("span").eq(0).html() == parseInt(res.allPac[a][1] / 1000)){
+                if($(this).parent().parent().find(".packetTable").find("tr").length != 0 && $(this).parent().parent().find(".packetTable").find("tr").last().find("td").length < 5){
+                  $(this).parent().parent().find(".packetTable").find("tr").last().append("<td>ID:"+res.allPac[a][0]+"</td>");
+                }else{
+                  $(this).parent().parent().find(".packetTable").append("<tr><td>ID:"+res.allPac[a][0]+"</td></tr>");
+                }
+              }
+            });
+          });
+        }
+        $(".printDiv").last().after("<div class='bottomDiv'> " +
+            "<p class='bottom'>有无异常-Whether abnormal：</p> " +
+            "<p class='bottom'>检查人-Inspector name：</p></div>");
+      },
+      error: function (e) {
+          $( "#loadingDialog" ).dialog("close");
+          $("#tipDiv").find("p").html("连接失败，请重试！<br>Connect failed! Please retry!");
+          $("#tipDiv").dialog("open");
+      }
+    });
+
+  });
+
+</script>
+</body>
+</html>

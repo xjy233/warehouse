@@ -1,0 +1,25 @@
+#mainDiv{
+    height: 95%;
+}
+#main{
+    height: 95%;
+    padding-top: 0.5rem;
+    padding-left: 0.5rem;
+    overflow: hidden;
+}
+.button{
+    color: white;
+    background-color: #49a9ee ;
+    border: none;
+    border-radius: 0.2rem;
+    height: 2rem;
+}
+#selectSpan{
+    margin-left: 0.5rem;
+}
+#spaceInputSpan{
+	display:none;
+}
+.shelfDiv{
+    height: 87%;
+}

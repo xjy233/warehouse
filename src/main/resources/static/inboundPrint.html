@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>仓储管理 打印-WarehouseManagement Print</title>
+  <link href="./css/jquery-ui.css" rel="stylesheet"/>
+  <link href="./css/main.css" rel="stylesheet"/>
+  <style media=print>
+    .noPrint{
+      display:none;
+    }
+    .pageNext{page-break-after: always;}
+  </style>
+  <style>
+    html{
+      text-align: center;
+      font-size: 16px;
+    }
+    body{
+      height: 100%;
+    }
+    #operationDiv{
+      margin: 1rem;
+    }
+    #printDiv{
+      text-align: left;
+      border: thin solid black;
+    }
+    #packetID{
+      font-size: 3rem;
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    #packetTable{
+      border: thin solid black;
+      border-collapse: collapse;
+      font-size: 1rem;
+      text-align: center;
+      width: 100%;
+    }
+    #packetTable td{
+      border: thin solid black;
+      height: 1rem;
+    }
+    #bottomDiv{
+      width: 100%;
+      display: flex;
+    }
+    .bottom{
+      width: 50%;
+    }
+    #headTr{
+      border: thin solid black;
+      text-align: center;
+    }
+    .goodsTr{
+      border: thin solid black ;
+      text-align: center;
+    }
+    #totalTr{
+      border: thin solid black ;
+      text-align: center;
+    }
+    .tdInput{
+      text-align: center;
+      border: none;
+      width: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+<div id="operationDiv" class="noPrint">
+  <button onclick="window.print()">打印</button>
+</div>
+
+<div id="printDiv">
+  <p id="packetID"></p>
+  <table id="packetTable"></table>
+  <div id="bottomDiv">
+    <p class="bottom">有无异常-Whether abnormal：</p>
+    <p class="bottom">检查人-Inspector name：</p>
+  </div>
+</div>
+
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write('<script src="./js/jquery-3.2.1.min.js"><\/script>')</script>
+
+<script src="http://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>!window.jQuery.ui && document.write('<script src="./js/jquery-ui.min.js"><\/script>')</script>
+<script src="js/main.js"></script>
+<script>
+  $(function(){
+      var total = null;
+      var totalWeight = null;
+      try{
+          var thisURL = document.URL;
+          var param =thisURL.split("?")[1];
+          var isOut = false;
+          if(param == "out"){
+              isOut = true;
+          }
+          if(param) {
+              if (isOut) {
+                  $("#packetID").html("PackID：" + localStorage.getItem("packetID") + "<br>Post.："
+                      + localStorage.getItem("shelf") + " - " + localStorage.getItem("position") + " <span style='font-size: 1rem'>Outbound " + localStorage.getItem("operationTime") + "</span>");
+              } else {
+                  $("#packetID").html("PackID：" + localStorage.getItem("packetID") + "<br>Post.："
+                      + localStorage.getItem("shelf") + " - " + localStorage.getItem("position") + " <span style='font-size: 1rem'>Inbound " + localStorage.getItem("operationTime") + "</span>");
+              }
+              $("#packetTable").html(localStorage.getItem("packetTable"));
+          }else{
+              $("#packetID").html("PackID："+localStorage.getItem("packetID") +"<br>Post.："
+                  + localStorage.getItem("shelf") + " - " + localStorage.getItem("position") +" <span style='font-size: 1rem'>Inbound "+ localStorage.getItem("operationTime") +"</span>");
+              $("#packetTable").html(localStorage.getItem("packetTable"));
+              $(".goodsTr").each(function(){
+                  total += parseInt($(this).find("input").eq(0).val());
+                  totalWeight += parseFloat($(this).find("input").eq(1).val());
+              });
+              $("#totalTdInput").val(total);
+              $("#weightTdInput").val(totalWeight);
+              $("#packetTable").find("input").prop("readonly",true);
+              $("#packetTable").find("tr").each(function(){
+                  $(this).find("td").last().remove();
+              });
+          }
+      }catch (e){
+          $("#packetID").html("PackID："+localStorage.getItem("packetID") +"<br>Post.："
+              + localStorage.getItem("shelf") + " - " + localStorage.getItem("position") +" <span style='font-size: 1rem'>Inbound "+ localStorage.getItem("operationTime") +"</span>");
+          $("#packetTable").html(localStorage.getItem("packetTable"));
+          $(".goodsTr").each(function(){
+              total += parseInt($(this).find("input").eq(0).val());
+              totalWeight += parseFloat($(this).find("input").eq(1).val());
+          });
+          $("#totalTdInput").val(total);
+          $("#weightTdInput").val(totalWeight);
+          $("#packetTable").find("input").prop("readonly",true);
+          $("#packetTable").find("tr").each(function(){
+              $(this).find("td").last().remove();
+          });
+      }finally {
+          $("tr").css("background-color","white");
+      }
+  });
+
+</script>
+</body>
+</html>

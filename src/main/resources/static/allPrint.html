@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>仓储管理 全盘打印-WarehouseManagement ShelfAllPrint</title>
+  <link href="./css/jquery-ui.css" rel="stylesheet"/>
+  <link href="./css/main.css" rel="stylesheet"/>
+  <link href="css/jquery.shCircleLoader.css" rel="stylesheet"/>
+  <style media=print>
+    .noPrint{
+      display:none;
+    }
+    .pageNext{page-break-after: always;}
+  </style>
+  <style>
+    html{
+      text-align: center;
+      font-size: 12px;
+    }
+    body{
+      height: 100%;
+    }
+    #shclDefault{
+      position: relative;
+      top: 50%;
+      left: 45%;
+      z-index: 1000;
+      width: 7rem;
+      height: 7rem;
+      color: #49a9ee;
+      margin-bottom: 2.5rem;
+    }
+    #operationDiv{
+      margin: 1rem;
+    }
+    .printDiv{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .rowDiv{
+      height: 100%;
+      width: 100%;
+      border: thin solid black;
+      margin: 0.2rem;
+      padding: 0.2rem;
+    }
+    #modalDiv{
+      height: 100%;
+    }
+    .packetID{
+      display: flex;
+      justify-content: space-around;
+    }
+    .bottomDiv{
+      width: 100%;
+      display: flex;
+    }
+    .bottom{
+      width: 50%;
+    }
+    .packetTable{
+      border: thin solid black;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 1rem;
+      text-align: center;
+      width: 100%;
+    }
+    #packetTable td{
+      border: thin solid black;
+      height: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<div id="operationDiv" class="noPrint">
+  <button onclick="window.print()">打印-Print</button>
+  <div id="loadingDialog" title="提示-Tips!">
+    <div id="shclDefault"></div>
+    <span></span>
+  </div>
+</div>
+
+<div class="printDiv">
+
+</div>
+
+
+<div id="modalDiv" style="display: none">
+  <p class="packetID">
+    Shelf：<span></span> Post.：<span></span> PrintTime：<span></span>
+  </p>
+  <table class="packetTable">
+    <!--<tr>
+      <td>88888</td>
+      <td>88888</td>
+      <td>88888</td>
+      <td>88888</td>
+      <td>88888</td>
+    </tr>
+    <tr>
+      <td>88888</td>
+      <td>88888</td>
+      <td>88888</td>
+      <td>88888</td>
+      <td>88888</td>
+    </tr>
+    <tr>
+      <td>88888</td>
+      <td>88888</td>
+      <td>88888</td>
+      <td>88888</td>
+      <td>88888</td>
+    </tr>
+    <tr>
+      <td>88888</td>
+      <td>88888</td>
+      <td>88888</td>
+      <td>88888</td>
+      <td>88888</td>
+    </tr>
+    <tr>
+      <td>88888</td>
+      <td>88888</td>
+      <td>88888</td>
+      <td>88888</td>
+      <td>88888</td>
+    </tr>
+    <tr>
+      <td>88888</td>
+      <td>88888</td>
+      <td>88888</td>
+      <td>88888</td>
+      <td>88888</td>
+    </tr>
+    <tr>
+      <td>88888</td>
+      <td>88888</td>
+      <td>88888</td>
+      <td>88888</td>
+      <td>88888</td>
+    </tr>-->
+  </table>
+  <div class="bottomDiv">
+    <p></p>
+    <!--<p class="bottom">有无异常：</p>-->
+    <!--<p class="bottom">检查人：</p>-->
+  </div>
+</div>
+
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write('<script src="./js/jquery-3.2.1.min.js"><\/script>')</script>
+
+<script src="http://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>!window.jQuery.ui && document.write('<script src="./js/jquery-ui.min.js"><\/script>')</script>
+
+<script src="js/main.js"></script>
+<script src="./js/jquery.shCircleLoader-min.js" type="text/javascript"></script>
+<script>
+  $(function(){
+    var thisURL = document.URL;
+    var param =thisURL.split("?")[1];
+    var shelfNum= param.split("=")[1];
+
+    $( "#loadingDialog" ).dialog({
+      autoOpen: false,
+      width: 400,
+      modal:true,
+      closeOnEscape: false,
+      dialogClass: "no-close"
+    });
+
+    $( "#loadingDialog" ).find("span").html("打印生成中，请稍等-Print is creating，please wait ......<br>注意：规模较大、包裹较多的货架可能需要较长时间，请耐心等候！<br>Warn: the shelf may too large to print in short time, please wait patiently!");
+    $( "#loadingDialog" ).dialog("open");
+    $('#shclDefault').shCircleLoader();
+    $.ajax({
+      type: "POST",
+      url: "/AllCheck/backAllPac",
+      dataType: "json",
+      data: {
+        "shelfNum": shelfNum
+      },
+      success: function (res) {
+        console.log(res.allPac);
+        var trLength = 0;
+        var tdLength = 0;
+        var lastPosition = res.allPac[res.allPac.length - 1][1];
+        if(isNaN(lastPosition)){
+          trLength = Number(lastPosition.substring(1, 2));
+          var postAarry = [];
+          for (var i = 1; i < res.allPac.length; i++) {
+              postAarry.push(res.allPac[i][1].substring(2, 5));
+          }
+          tdLength = Math.max.apply(null, postAarry);
+        }else{
+          trLength = parseInt(parseInt(lastPosition % 1000) /100);
+          var postAarry = [];
+          for (var i = 1; i < res.allPac.length; i++) {
+              postAarry.push(res.allPac[i][1] % 100);
+          }
+          tdLength = Math.max.apply(null, postAarry);
+        }
+        for(var i = 0 ;i < trLength;i++){
+          $(".printDiv").append("<div class='rowDiv'>" + $("#modalDiv").html() + "</div>");
+        }
+        for(var i = 1 ;i < tdLength;i++){
+          $(".printDiv").last().after($(".printDiv").last().clone());
+        }
+        for(var i = 0 ;i < tdLength;i++){
+          for(var n = 0;n < trLength;n++) {
+            var clo = i + 1;
+            var row = n + 1;
+            var td = 1;
+            var $dom = $(".printDiv").eq(i).find(".rowDiv").eq(n);
+            if(i < 9){
+              $dom.find(".packetID").find("span").eq(1).html(row + "0" + clo);
+            }else{
+              $dom.find(".packetID").find("span").eq(1).html(row + "" + clo);
+            }
+            $dom.find(".packetID").find("span").eq(0).html(shelfNum);
+            $dom.find(".packetID").find("span").eq(2).html(res.allPac[0]);
+            $dom.find(".packetTable").empty();
+          }
+        }
+        for(var a = 1;a < res.allPac.length;a++){
+          $(".packetID").each(function(){
+            $(this).find("span").eq(1).each(function(){
+              var position = res.allPac[a][1] % 1000;
+              if($(this).html() == position){
+                if($(this).parent().parent().find(".packetTable").find("tr").length != 0 && $(this).parent().parent().find(".packetTable").find("tr").last().find("td").length < 5){
+                  $(this).parent().parent().find(".packetTable").find("tr").last().append("<td>ID:"+res.allPac[a][0]+"</td>");
+                }else{
+                  $(this).parent().parent().find(".packetTable").append("<tr><td>ID:"+res.allPac[a][0]+"</td></tr>");
+                }
+              }
+            });
+          });
+        }
+        $(".packetTable").each(function(){
+          if($(this).html() == ""){
+              $(this).parent().remove();
+          }
+        });
+        $(".printDiv").each(function(){
+          if($(this).find(".rowDiv").length == 0){
+            $(this).remove();
+          }
+        });
+        $(".printDiv").last().after("<div class='bottomDiv'> " +
+          "<p class='bottom'>有无异常-Whether abnormal：</p> " +
+          "<p class='bottom'>检查人-Inspector name：</p></div>");
+
+        $( "#loadingDialog" ).dialog("close");
+      },
+      error: function(e){
+        $( "#loadingDialog" ).dialog("close");
+        $("#tipDiv").find("p").html("连接失败，请重试！<br>Connect failed! Please retry!");
+        $("#tipDiv").dialog("open");
+      }
+    });
+  });
+
+</script>
+</body>
+</html>

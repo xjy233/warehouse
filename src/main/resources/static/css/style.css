@@ -1,0 +1,17 @@
+.supplierSelect{
+    width:8.5rem;
+}
+#info2{
+    position: relative;
+    top:0.5rem;
+}
+#info{
+    position: relative;
+    top:0.3rem;
+}
+.delete{
+    width:1.5rem;
+    height:1.5rem;
+    position: relative;
+    top: 0.4rem;
+}

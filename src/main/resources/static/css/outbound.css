@@ -1,0 +1,151 @@
+#out{
+    margin-right: 2rem;
+    position: relative;
+    bottom:0.35rem;
+}
+.ui-tabs{
+    font-size: 0.8rem;
+    background-color: white;
+}
+.ui-tabs .ui-tabs-panel{
+     padding: 0 0 1rem;
+}
+.ui-tabs-anchor{
+    font-size: 0.8rem;
+}
+.ui-widget-content{
+    background-image: none;
+}
+.ui-widget button{
+    font-size: 13.3333px;
+    font-family: Arial;
+    outline: none;
+}
+.ui-widget input{
+    font-size: 13.3333px;
+    font-family: Arial;
+}
+.ui-widget select{
+    border: 0.1rem solid #d4d4d9;
+    border-radius: 0.7rem;
+    outline: none;
+    padding: 0.3rem 0.5rem;
+    margin: 0.1rem;
+    font-size: 0.8rem;
+    width:8.5rem;
+    margin-left: 0.5rem;
+    font-family: Arial;
+}
+#conditionAutomatic{
+    display: flex;
+    justify-content: space-between;
+    padding:0.5rem 1.5rem 0.5rem 3rem;
+}
+#addBtnAutomatic{
+    background-color: grey;
+}
+#tabAutomatic{
+    border: solid #ecf6fd thin;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    height:2.5rem;
+    width:95%;
+    position: relative;
+    left:2.5%;
+    right:2.5%;
+    text-align: center;
+
+}
+#t1Automatic{
+    border: solid #ecf6fd thin;
+    border-collapse: collapse;
+    background-color: #ecf6fd;
+    font-size: 0.9rem;
+    line-height:2.5rem;
+    width:95%;
+    position: relative;
+    left:2.5%;
+    right:2.5%;
+    text-align: center;
+}
+#condition2{
+    display: flex;
+    justify-content: space-between;
+    /*padding:0.5rem 2rem;*/
+}
+#listt{
+    position: relative;
+    top:0.5rem;
+    left:2rem;
+}
+#mainDiv{
+
+}
+#tab2{
+    border: solid #ecf6fd thin;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    height:2.5rem;
+    width:95%;
+    position: relative;
+    left:2.5%;
+    right:2.5%;
+    text-align: center;
+
+}
+#t2{
+    border: solid #ecf6fd thin;
+    border-collapse: collapse;
+    background-color: #ecf6fd;
+    font-size: 0.9rem;
+    line-height:2.5rem;
+    width:95%;
+    position: relative;
+    left:2.5%;
+    right:2.5%;
+    text-align: center;
+}
+.t2{
+    border: solid #ecf6fd thin;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    line-height:2.5rem;
+    width:95%;
+    position: relative;
+    left:2.5%;
+    right:2.5%;
+    text-align: center;
+}
+#empty{
+    margin-right:3rem;
+}
+#addBtn{
+    background-color: grey;
+    outline: none;
+}
+#empty{
+    background-color: grey;
+}
+#out{
+    background-color: grey;
+    outline: none;
+}
+#main{
+    overflow: visible;
+}
+
+.t1{
+    border: solid #ecf6fd thin;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    line-height:2.5rem;
+    width:95%;
+    position: relative;
+    left:2.5%;
+    right:2.5%;
+    text-align: center;
+}
+.add{
+    position: relative;
+    top: 0.2rem;
+}

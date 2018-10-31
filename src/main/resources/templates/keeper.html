@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>仓储管理 库管-WarehouseManagement Manager</title>
+    <link href="./css/jquery-ui.css" rel="stylesheet"/>
+    <link href="./css/main.css" rel="stylesheet"/>
+    <link href="./css/chart.css" rel="stylesheet"/>
+    <link href="./css/keeper.css" rel="stylesheet"/>
+    <style>
+        .manege{
+            font-size: 0.7rem;
+        }
+        .name{
+            border: 0.1rem solid #d4d4d9;
+            border-radius: 0.2rem;
+            outline: none;
+            padding: 0.3rem 0.5rem;
+            font-size: 0.8rem;
+            width:6rem;
+            height:1.0rem;
+            position: relative;
+        }
+        #Empno{
+            position: relative;
+            left:0.5rem;
+        }
+        .word5{
+            position: relative;
+            left:1rem;
+        }
+        #word5{
+            position: relative;
+            left:2rem;
+        }
+        #btn1{
+            position: relative;
+            left:0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+<div id="titleDiv">
+    <div id="title">
+        <span id="title1">仓储管理系统-Warehouse Management System</span>
+    </div>
+    <img id="user" src="./img/user.png" alt="用户-User"/>
+</div>
+<div id="pageDiv">
+    <div id="barDiv">
+        <ul style="width:100%;" id="menu">
+            <li ><div class="li">首页<br/>Home</div></li>
+            <li ><div class="li">查询<br/>Query</div>
+                <ul>
+                    <li><div>货物信息<br/>Wares Info.</div></li>
+                    <li><div>出入库记录<br/>In&Outbound REC.</div></li>
+                </ul>
+            </li>
+            <li ><div class="li">入库<br/>Inbound</div></li>
+            <li ><div class="li">出库<br/>Outbound</div></li>
+            <li ><div class="li">盘点<br/>Check</div>
+                <ul>
+                    <li><div>全部货架<br/>All Shelf</div></li>
+                    <li><div>变动位置<br/>Changed Post.</div></li>
+                </ul>
+            </li>
+            <li ><div class="li">管理<br/>Management</div>
+                <ul>
+                    <li><div>货物<br/>Ware</div>
+                        <ul>
+                            <li><div>供应商<br/>Supplier</div></li>
+                            <li><div>款式<br/>Style</div></li>
+                            <li><div>颜色<br/>Color</div></li>
+                            <li><div>尺码<br/>Size</div></li>
+                        </ul>
+                    </li>
+                    <li><div>货架<br/>Shelf</div>
+                        <ul>
+                            <li><div>货架管理<br/>management</div></li>
+                            <li><div>货架扩容<br/>Expansion</div></li>
+                        </ul>
+                    </li>
+                    <li><div>人员<br/>Staff</div>
+                        <ul>
+                            <li><div>库管<br/>Manager</div></li>
+                            <li><div>普通<br/>Employee</div></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div id="mainDiv">
+        <span id="word1">管理-Manage / 人员-Staff / </span>
+        <span id="word2">库管-Manager</span>
+        <div id="main">
+            <div class="manege">
+                <span>功能管理-FunctionManage：</span>
+                <input type="checkbox" checked="checked" disabled="disabled" name="function" value="0"/><span>首页-Home</span>
+                <input type="checkbox" checked="checked" disabled="disabled" name="function" value="2"/><span>查询-Query</span>
+                <input type="checkbox" checked="checked" disabled="disabled" name="function" value="3"/><span>入库-Inbound</span>
+                <input type="checkbox" checked="checked" disabled="disabled" name="function" value="4"/><span>出库-Outbound</span>
+                <input type="checkbox" checked="checked" disabled="disabled" name="function" value="5"/><span>盘点-Check</span>
+                <input type="checkbox" disabled="disabled" name="function" value="6"/><span>管理-Manage</span>
+
+            </div>
+            <div class="word">
+                <span id="word5">工号-ID</span><input id="Empno" class="name" type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="工号-ID">
+                <span class="word5">初始密码-Initial Pwd</span><input id="Passwd" class="name" type="text" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" placeholder="初始密码-Initial Pwd">
+                <span class="word5">姓名-Name</span><input id="Name" class="name" type="text" placeholder="姓名-Name">
+                <span class="word5">手机号-Phone</span><input id="Phone" class="name" type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="手机号-Phone">
+                <button id="btn1">添加-Add</button>
+            </div>
+            <table id="tab" >
+                <tr id="t1">
+                    <td>工号-ID</td>
+                    <td>初始密码-Initial Pwd</td>
+                    <td>姓名-Name</td>
+                    <td>手机号-Phone</td>
+                    <td>已出库查询权限-Permission</td>
+                    <td>重置密码-Reset Pwd</td>
+                    <td>删除-Delete</td>
+                </tr>
+                <!-- <tr class="t2">
+                    <td>0001</td>
+                    <td>1234</td>
+                    <td>李思</td>
+                    <td>2014220</td>
+                    <td><input  class="titleExtra" title="查询出库货物 Querying history wares" type="checkbox"></td>
+                    <td class="resBtn" type="button"><img class="reset" src="./img/reset.png" alt="重置-reset"></td>
+                    <td class="delBtn" type="button"><img class="delete" src="./img/delete.png" alt="删除-Delete"></td>
+                </tr> -->
+
+            </table>
+        </div>
+    </div>
+    <div id="delDialog" title="请确认操作！-Please confirm your operation!">
+        <p>您确定要删除该信息吗？<br>Are you sure to delete?</p>
+    </div>
+    <div id="resDialog" title="请确认操作！-Please confirm your operation!">
+        <p>您确定要重置该用户的密码吗？<br>Are you sure to reset the password?</p>
+    </div>
+    <div id="perDialog" title="请确认操作！-Please confirm your operation!">
+        <p>您确定要修改该用户的权限吗？<br>Are you sure to allow the user to have more permissions?</p>
+    </div>
+    <div id="exDialog" title="提醒！-Warn!">
+        <p>已存在<br>Already exist</p>
+    </div>
+    <div id="tipDiv" title="提示-Tips！">
+        <p></p>
+    </div>
+    <div id="logoutDiv" title="注销确定-Logout Confirm！">
+        <p>您确定要注销并返回登录页面吗？</p>
+        <p>Are you sure to logout and go to the login page?</p>
+    </div>
+</div>
+
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write('<script src="./js/jquery-3.2.1.min.js"><\/script>')</script>
+
+<script src="http://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>!window.jQuery.ui && document.write('<script src="./js/jquery-ui.min.js"><\/script>')</script>
+<script src="./js/main.js"></script>
+<script src="./js/keeper.js"></script>
+<script>
+</script>
+</body>
+</html>

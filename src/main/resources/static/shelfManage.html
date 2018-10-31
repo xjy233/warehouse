@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>仓储管理 货架新增-WarehouseManagement ShelfIncrease</title>
+    <link href="./css/jquery-ui.css" rel="stylesheet"/>
+    <link href="./css/main.css" rel="stylesheet"/>
+    <link href="css/chart.css" rel="stylesheet"/>
+    <link href="css/shelfManage.css" rel="stylesheet"/>
+    <link href="css/jquery.shCircleLoader.css" rel="stylesheet"/>
+    <style>
+        #shclDefault{
+            position: relative;
+            top: 50%;
+            left: 45%;
+            z-index: 1000;
+            width: 7rem;
+            height: 7rem;
+            color: #49a9ee;
+        }
+    </style>
+</head>
+<body>
+
+<div id="titleDiv">
+    <div id="title">
+    <span id="title1">仓储管理系统-Warehouse Management System</span>
+    </div>
+    <img id="user" src="./img/user.png" alt="用户-User"/>
+</div>
+<div id="pageDiv">
+    <div id="barDiv">
+        <ul style="width:100%;" id="menu">
+            <li ><div class="li">首页<br/>Home</div></li>
+            <li ><div class="li">查询<br/>Query</div>
+                <ul>
+                    <li><div>货物信息<br/>Wares Info.</div></li>
+                    <li><div>出入库记录<br/>In&Outbound REC.</div></li>
+                </ul>
+            </li>
+            <li ><div class="li">入库<br/>Inbound</div></li>
+            <li ><div class="li">出库<br/>Outbound</div></li>
+            <li ><div class="li">盘点<br/>Check</div>
+                <ul>
+                    <li><div>全部货架<br/>All Shelf</div></li>
+                    <li><div>变动位置<br/>Changed Post.</div></li>
+                </ul>
+            </li>
+            <li ><div class="li">管理<br/>Management</div>
+                <ul>
+                    <li><div>货物<br/>Ware</div>
+                        <ul>
+                            <li><div>供应商<br/>Supplier</div></li>
+                            <li><div>款式<br/>Style</div></li>
+                            <li><div>颜色<br/>Color</div></li>
+                            <li><div>尺码<br/>Size</div></li>
+                        </ul>
+                    </li>
+                    <li><div>货架<br/>Shelf</div>
+                        <ul>
+                            <li><div>货架管理<br/>management</div></li>
+                            <li><div>货架扩容<br/>Expansion</div></li>
+                        </ul>
+                    </li>
+                    <li><div>人员<br/>Staff</div>
+                        <ul>
+                            <li><div>库管<br/>Manager</div></li>
+                            <li><div>普通<br/>Employee</div></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div id="mainDiv">
+        <span id="word1">管理-Manege / 货架-Shelf / </span>
+        <span id="word2">货架新增-Shelf Increase</span>
+        <div id="main">
+            <div class="word">
+                <span id="word3">规格-Specifications：</span>
+                <span class="word4">行-Row:</span><input  style="width:3rem;" id="Row" class="size" type="number" placeholder="1-9"/>
+                <span class="word4">列-Column:</span><input  style="width:3rem;" id="Col" class="size" type="number" placeholder="1-99"/>
+                <span class="word4">包/格-Package:</span><input  style="width:3rem;" id="Pack" class="size" type="number" placeholder="1-1000"/>
+                <span class="word4">货架编号-Shelf ID:</span><input id="ID" class="size" type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="1-99"/>
+                <button id="btn1">添加Add</button>
+            </div>
+            <table id="tab" >
+                <tr id="t1">
+                    <td>序号-No</td>
+                    <td>货架编号-Shelf ID</td>
+                    <td>已使用量-Used/货架上限-Max</td>
+                    <td>删除-Delete</td>
+                </tr>
+                 <!--<tr class="t2">
+                    <td>1</td>
+                    <td>A</td>
+                    <td>1000/3780</td>
+                    <td class="delBtn" type="button"><img  class="delete" src="./img/delete.png" alt="删除-Delete"></td>
+                </tr>-->
+                <div class="dialog" title="确认操作-Confirm！">
+                    <p>该货架不为空，是否进行智能分发？</p>
+                    <p>The shelf is not empty.</p>
+                </div>
+                <div id="delDialog" title="确认操作-Confirm！">
+                    <p>您确定要删除吗？?</p>
+                    <p>Are you sure to delete?</p>
+                </div>
+                 <!--<div id="warDialog" title="提示-Warn!">
+                     <p>请填写详细规格。</p>
+                     <p>Please input all the specifications.</p>
+                </div>-->
+                <div id="logoutDiv" title="注销确定-Logout Confirm！">
+                    <p>您确定要注销并返回登录页面吗？</p>
+                    <p>Are you sure to logout and go to the login page?</p>
+                </div>
+                <div id="9Dialog" title="提示-Warn!">
+                    <p>行的范围是1-9！</p>
+                    <p>The range of rows is 1-99!</p>
+                </div>
+                <div id="99Dialog" title="提示-Warn!">
+                    <p>列的范围是1-99！</p>
+                    <p>The range of columns is 1-99!</p>
+                </div>
+                <div id="1000Dialog" title="提示-Warn!">
+                    <p>包裹数的范围是1-1000！</p>
+                    <p>The range of packages is 1-1000!</p>
+                </div>
+                <div id="loadingDialog" title="提示-Tips!">
+                    <div id="shclDefault"></div>
+                    <span></span>
+                </div>
+                <div id="tipDiv" title="提示-Tips！">
+                    <p></p>
+                </div>
+                <div id="IDDialog" title="提示-Warn!">
+                    <p>货架ID的范围是1-99！</p>
+                    <p>The range of shelfID is 1-99!</p>
+                </div>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write('<script src="./js/jquery-3.2.1.min.js"><\/script>')</script>
+
+<script src="http://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>!window.jQuery.ui && document.write('<script src="./js/jquery-ui.min.js"><\/script>')</script>
+<script src="./js/main.js"></script>
+<script src="./js/jquery.shCircleLoader-min.js" type="text/javascript"></script>
+<script src="./js/shelfManage.js"></script>
+<script>
+</script>
+</body>
+</html>

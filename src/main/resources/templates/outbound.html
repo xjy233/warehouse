@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>仓储管理 出库-WarehouseManagement Outbound</title>
+    <link href="./css/jquery-ui.css" rel="stylesheet"/>
+    <link href="./css/main.css" rel="stylesheet"/>
+    <link href="css/chart.css" rel="stylesheet"/>
+    <link href="css/query.css" rel="stylesheet"/>
+    <link href="css/outbound.css" rel="stylesheet"/>
+    <link href="css/jquery.shCircleLoader.css" rel="stylesheet"/>
+    <style>
+        #shclDefault{
+            position: relative;
+            top: 50%;
+            left: 45%;
+            z-index: 1000;
+            width: 7rem;
+            height: 7rem;
+            color: #49a9ee;
+        }
+    </style>
+</head>
+<body onbeforeunload="clearUp()">
+
+<div id="titleDiv">
+    <div id="title">
+        <span id="title1">仓储管理系统-Warehouse Management System</span>
+    </div>
+    <img id="user" src="./img/user.png" alt="用户-User"/>
+</div>
+<div id="pageDiv">
+    <div id="barDiv">
+        <ul style="width:100%;" id="menu">
+            <li ><div class="li">首页<br/>Home</div></li>
+            <li ><div class="li">查询<br/>Query</div>
+                <ul>
+                    <li><div>货物信息<br/>Wares Info.</div></li>
+                    <li><div>出入库记录<br/>In&Outbound REC.</div></li>
+                </ul>
+            </li>
+            <li ><div class="li">入库<br/>Inbound</div></li>
+            <li ><div class="li">出库<br/>Outbound</div></li>
+            <li ><div class="li">盘点<br/>Check</div>
+                <ul>
+                    <li><div>全部货架<br/>All Shelf</div></li>
+                    <li><div>变动位置<br/>Changed Post.</div></li>
+                </ul>
+            </li>
+            <li ><div class="li">管理<br/>Management</div>
+                <ul>
+                    <li><div>货物<br/>Ware</div>
+                        <ul>
+                            <li><div>供应商<br/>Supplier</div></li>
+                            <li><div>款式<br/>Style</div></li>
+                            <li><div>颜色<br/>Color</div></li>
+                            <li><div>尺码<br/>Size</div></li>
+                        </ul>
+                    </li>
+                    <li><div>货架<br/>Shelf</div>
+                        <ul>
+                            <li><div>货架管理<br/>management</div></li>
+                            <li><div>货架扩容<br/>Expansion</div></li>
+                        </ul>
+                    </li>
+                    <li><div>人员<br/>Staff</div>
+                        <ul>
+                            <li><div>库管<br/>Manager</div></li>
+                            <li><div>普通<br/>Employee</div></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div id="mainDiv">
+        <span id="word2">出库-Outbound</span>
+        <div id="main">
+            <div id="tabs">
+                <ul>
+                    <li><a href="#tabs-1">智能推荐-Automatic Recommend</a></li>
+                    <li><a href="#tabs-2">自定义出库-Custom Outbound</a></li>
+                </ul>
+                <div id="tabs-1">
+                    <div id="conditionAutomatic">
+                        <span style="display: flex"><img id="addAutomatic" class="add" src="./img/add.png" alt="添加-Add">
+                            <div>
+                                <div class="queryDiv">
+                                    <select class="modelNoSelect">
+                                        <option selected value="null">模版-Model No.</option>
+                                    </select>
+                                    数量-Num.<input type="number" >
+                                </div>
+                            </div>
+                        </span>
+                        <button id="autoButton" class="query" style="margin-right: 1.5rem">推荐-Recommend</button>
+                        <button id="addBtnAutomatic" class="query" style="margin-right: 1.5rem" disabled>加入出库表<br/>Add To List</button>
+                    </div>
+                    <div style="overflow: auto;height: 11rem">
+                        <table id="tabAutomatic" >
+                            <tr id="t1Automatic">
+                                <td>序号-No</td>
+                                <td>包裹-ID</td>
+                                <td>模版-Model No.</td>
+                                <td>系列-Department</td>
+                                <td>品牌-Brand</td>
+                                <td>型号-Fitting</td>
+                                <td>供应商-Supplier</td>
+                                <td>尺码-Size</td>
+                                <td>颜色-Color</td>
+                                <td>位置-Position</td>
+                                <td>数量-Number</td>
+                                <td ><input id='checkAllAutomatic' type="checkbox"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="tabs-2">
+                    <div id="condition">
+                        <span id="idInputSpan">
+                            <input style="margin-left: 1.3rem" id="packetIdInput" onkeyup="this.value=this.value.replace(/\D/g,'')" class="name" type="text" placeholder="包裹ID-PacketID"/>
+                            <span style="margin-left: 5rem">or</span>
+                        </span>
+                        <span  id="add" type="button"><img class="add" src="./img/add.png" alt="添加-Add"></span>
+                        <form  class="info" method="post">
+                            <div class="queryDiv">
+                                <select class="modelNoSelect">
+                                    <option selected value="null">模版-Model No.</option>
+                                </select>
+                                <select class="departmentSelect">
+                                    <option selected value="null">系列-Department</option>
+                                </select>
+                                <select class="brandSelect">
+                                    <option selected value="null">品牌-Brand</option>
+                                </select>
+                                <select class="fittingSelect">
+                                    <option selected value="null">型号-Fitting</option>
+                                </select>
+                                <br>
+                                <select style="visibility:hidden;"></select>
+                                <select class="supplierSelect">
+                                    <option selected value="null">供应商-Supplier</option>
+                                </select>
+                                <select class="sizeSelect">
+                                    <option selected value="null">尺码-Size</option>
+                                </select>
+                                <select class="colorSelect">
+                                    <option selected value="null">颜色-Color</option>
+                                </select>
+                            </div>
+                        </form>
+                        <button id="queryBtn" class="query" style="margin-right: 1.5rem">查询-Query</button>
+                        <button id="addBtn" class="query" style="margin-right: 1.5rem" disabled>加入出库表<br/>Add To List</button>
+                    </div>
+                    <div style="overflow: auto;height: 11rem">
+                        <table id="tab" >
+                            <tr id="t1">
+                                <td>序号-No</td>
+                                <td>包裹-ID</td>
+                                <td>模版-Model No.</td>
+                                <td>系列-Department</td>
+                                <td>品牌-Brand</td>
+                                <td>型号-Fitting</td>
+                                <td>供应商-Supplier</td>
+                                <td>尺码-Size</td>
+                                <td>颜色-Color</td>
+                                <td>位置-Position</td>
+                                <td>数量-Number</td>
+                                <td ><input id='checkAll' type="checkbox"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="condition2">
+                <span id="listt">出库列表-Outbound List:</span>
+                <div>
+                <button id="empty" style="margin-right: 1.5rem;margin-top: 0.5rem">清空-Empty</button>
+                <button id="out" disabled>出库<br/>Outbound</button>
+                    <div id="outDialog" title="提醒！-Warn!">
+                        <p>确认执行出库操作？<br>Confirm your operation of outbound？</p>
+                    </div>
+                    <div id="dialog" title="操作成功Success！">
+                        <p>出库成功，请打印出库单！</p>
+                        <p>Outbound success！Please print.</p>
+                    </div>
+                </div>
+            </div>
+            <div style="overflow: auto;height: 40%">
+            <table id="tab2" style="overflow: auto">
+                <tr id="t2">
+                    <td>序号-No</td>
+                    <td>包裹-ID</td>
+                    <td>模版-Model No.</td>
+                    <td>系列-Department</td>
+                    <td>品牌-Brand</td>
+                    <td>型号-Fitting</td>
+                    <td>供应商-Supplier</td>
+                    <td>尺码-Size</td>
+                    <td>颜色-Color</td>
+                    <td>位置-Position</td>
+                    <td>数量-Number</td>
+                    <td ><input id='checkAll2' type="checkbox"></td>
+                </tr>
+            </table>
+            </div>
+        </div>
+    </div>
+    <div id="tipDiv" title="提示-Tips！">
+        <p></p>
+    </div>
+    <div id="logoutDiv" title="注销确定-Logout Confirm！">
+        <p>您确定要注销并返回登录页面吗？</p>
+        <p>Are you sure to logout and go to the login page?</p>
+    </div>
+    <div id="longDialog" title="提醒！-Warn!">
+        <p>包裹ID输入必须为8位且为数字！<br>ID must be 8 bits long!</p>
+    </div>
+    <div id="resDialog" title="提醒！-Warn!">
+        <p>没有找到符合条件的结果！<br>No proper result!</p>
+    </div>
+    <div id="refDialog" title="提醒！-Warn!">
+        <p>操作失败，请刷新页面！<br>Operation failed! Please refresh page!</p>
+    </div>
+    <div id="printDialog" title="请确认打印-Please Confirm to print！">
+        <div>
+            出库纪录查询，可以再次进行打印。<br/>
+            you can query inbound record and print it again.
+        </div>
+    </div>
+    <div id="loadingDialog" title="提示-Tips!">
+        <div id="shclDefault"></div>
+        <span></span>
+    </div>
+</div>
+
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write('<script src="./js/jquery-3.2.1.min.js"><\/script>')</script>
+
+<script src="http://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>!window.jQuery.ui && document.write('<script src="./js/jquery-ui.min.js"><\/script>')</script>
+<script src="./js/main.js"></script>
+<script src="./js/jquery.shCircleLoader-min.js" type="text/javascript"></script>
+<script src="./js/outbound.js"></script>
+<script>
+    function clearUp(){
+        var length = 0;
+        var unlock = [];
+        $("input[name='chkItem2']:checkbox").each(function() {
+            unlock[length]= $(this).parent().parent().find("td").eq(1).html();
+            length++
+        });
+        $.ajax({
+            type: "POST",
+            url: "/OutHouse/unLockPac",
+            dataType: "json",
+            data: {
+                "pacId":JSON.stringify(unlock)
+            },
+            success: function (res) {
+
+            },
+            error: function(e) {
+            }
+        })
+    }
+
+</script>
+</body>
+</html>

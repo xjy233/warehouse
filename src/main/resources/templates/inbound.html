@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <title>仓储管理 入库-WarehouseManagement Inbound</title>
+  <link href="./css/jquery-ui.css" rel="stylesheet"/>
+  <link href="./css/main.css" rel="stylesheet"/>
+  <link href="./css/inbound.css" rel="stylesheet"/>
+  <link href="css/jquery.shCircleLoader.css" rel="stylesheet"/>
+  <style>
+    #shclDefault{
+      position: relative;
+      top: 50%;
+      left: 45%;
+      z-index: 1000;
+      width: 7rem;
+      height: 7rem;
+      color: #49a9ee;
+    }
+  </style>
+</head>
+<body>
+
+<div id="titleDiv">
+  <div id="title">
+    <span id="title1">仓储管理系统-Warehouse Management System</span>
+  </div>
+  <img id="user" src="./img/user.png" alt="用户"/>
+</div>
+<div id="pageDiv">
+  <div id="barDiv">
+    <ul style="width:100%;" id="menu">
+      <li ><div class="li">首页<br/>Home</div></li>
+      <li ><div class="li">查询<br/>Query</div>
+        <ul>
+          <li><div>货物信息<br/>Wares Info.</div></li>
+          <li><div>出入库记录<br/>In&Outbound REC.</div></li>
+        </ul>
+      </li>
+      <li ><div class="li">入库<br/>Inbound</div></li>
+      <li ><div class="li">出库<br/>Outbound</div></li>
+      <li ><div class="li">盘点<br/>Check</div>
+        <ul>
+          <li><div>全部货架<br/>All Shelf</div></li>
+          <li><div>变动位置<br/>Changed Post.</div></li>
+        </ul>
+      </li>
+      <li ><div class="li">管理<br/>Management</div>
+        <ul>
+          <li><div>货物<br/>Ware</div>
+            <ul>
+              <li><div>供应商<br/>Supplier</div></li>
+              <li><div>款式<br/>Style</div></li>
+              <li><div>颜色<br/>Color</div></li>
+              <li><div>尺码<br/>Size</div></li>
+            </ul>
+          </li>
+          <li><div>货架<br/>Shelf</div>
+            <ul>
+              <li><div>货架管理<br/>management</div></li>
+              <li><div>货架扩容<br/>Expansion</div></li>
+            </ul>
+          </li>
+          <li><div>人员<br/>Staff</div>
+            <ul>
+              <li><div>库管<br/>Manager</div></li>
+              <li><div>普通<br/>Employee</div></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <div id="usageWarnDiv">仓库使用率<br/>Warehouse Usage：<span id="usageSpan">0%</span></div>
+  </div>
+
+  <div id="mainDiv">
+    <span id="word2">入库-Inbound</span>
+    <div id="main">
+      <p>
+        该包裹货物总数-The Total Of Wares：<input id="totalInput" type="number" placeholder="100" value="100"/>
+      </p>
+      <div id="goodsDiv">
+        <p>货物信息录入-Enter Wares：</p>
+        <div class="conditionDiv">
+          模版-Model No.
+          <select id="modelNoSelect">
+            <option disabled selected>选择-Select</option>
+          </select>
+          数量-Num.<input id="numInput" type="number"/>
+          重量-Weight(kg)<input id="weightInput" type="number"/>
+          <button id="addButton" class="button">添加-Add</button>
+        </div>
+        <table id="detailsTable">
+          <tr id="headTr">
+            <td>序号-No.</td>
+            <td>模版-Model No.</td>
+            <td>系列-Department</td>
+            <td>品牌-Brand</td>
+            <td>型号-Fitting</td>
+            <td>供应商-Supplier</td>
+            <td>颜色-Color</td>
+            <td>尺码-Size</td>
+            <td>数量-Number</td>
+            <td>重量-Weight</td>
+            <td>操作-Operation</td>
+          </tr>
+          <tr id="totalTr">
+            <td>总计-Total</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td id="totalTd" title="请核对货物总数-Please Check The Total" type="text"><input id="totalTdInput" class="tdInput" type="text" value="" readonly/></td>
+            <td id="weightTd" type="text"><input id="weightTdInput" class="tdInput" type="text" value="" readonly/></td>
+            <td><span id="delAllSpan"><img src="./img/delete.png"></span></td>
+          </tr>
+        </table>
+      </div>
+
+      <div id="positionDiv">
+        <p>存放位置-Placed Wares：</p>
+        <input id="autoPlacedRadio" type="radio" name="placedMethod" value="智能推荐-Automatic Recommend"/>
+        <label for="autoPlacedRadio">智能推荐-Automatic Recommend</label>
+        <button id="startAutoButton" class="button">开始-Start</button>
+        <div id="autoResultDiv">
+          <p id="autoResultP">推荐结果-Recommend Result：货架-Shelf<span id="autoResultSpan"></span></p>
+          <div class="shelfDiv" id="autoShelfDiv">
+            <table class="shelfTable" id="autoPlacedTable">
+            </table>
+          </div>
+          <!--<div class="footDiv">
+            <span class="footSpan"></span>
+            <span class="footSpan"></span>
+          </div>-->
+        </div>
+        <br>
+        <input id="customPlacedRadio" type="radio" name="placedMethod" value="自定义存放-Custom Placed"/>
+        <label for="customPlacedRadio">自定义存放-Custom Placed</label>
+        <div id="customResultDiv">
+          选择货架-Select Shelf：
+          <select id="shelfSelect">
+            <option selected disabled></option>
+          </select>
+          <span>
+            位置-Space Position：
+            <input id="positionInput" type="text" placeholder="必须>100-Must Be Greater Than 100" />
+          </span>
+          <div class="shelfDiv" id="customShelfDiv">
+            <table class="shelfTable" id="customPlacedTable">
+            </table>
+          </div>
+          <!--<div class="footDiv">
+            <span class="footSpan"></span>
+            <span class="footSpan"></span>
+          </div>-->
+        </div>
+        <br>
+      </div>
+
+      <div id="operationDiv">
+        <button id="saveButton" class="button">入库保存-Save Inbound</button>
+        <button id="printQueryButton" class="button">入库历史-Inbound History</button>
+      </div>
+
+      <div id="dialogDiv" title="请确认操作-Please Confirm Your Operation！">
+        <p id="confirmP" class="dialogP">
+          您确定通过 <span id="methodSpan" class="positionText"></span> 方式将该货物包裹入库到货架 <span id="selectedShelfSpan" class="positionText"></span> 位置 <span id="positionSpan" class="positionText"></span>吗？
+          <br/>Are you sure to use this method to put the packet into the space?
+        </p>
+        <p id="warnP"  class="dialogP">
+          您确定已经选择货物<span  class="positionText">入库方式和位置</span>了吗？
+          <br/>
+          Are you sure that you have selected the <span  class="positionText">method and position</span> of wares inbound?
+        </p>
+        <p id="notNullP"  class="dialogP">
+          数量或重量不能为0且输入必须为数字！
+          <br/>
+          The number or weight of wares should be null and the input should be a number!
+        </p>
+        <p id="totalP"  class="dialogP">
+          货物数量和包裹预设总数不一致！
+          <br/>
+          the number of wares in the table is different from the total above!
+        </p>
+        <p id="selectP"  class="dialogP">
+          货物的模版需要选择！
+          <br/>
+          the modelNo. of wares needs selecting!
+        </p>
+        <p id="radioP"  class="dialogP">
+          需先选定"智能推荐"入库方式！
+          <br/>
+          "Automatic Recommend" should be chosen before starting recommend!
+        </p>
+        <p id="smartP"  class="dialogP">
+          推荐失败，没有符合条件的位置，请重试或自定义存放！
+          <br/>
+          Recommend failed! No available position, please retry or chose "Custom Placed"!
+        </p>
+      </div>
+      <div id="delAllGoodsDiv" title="请确认操作-Please Confirm Your Operation！">
+        <p>
+          您确定要清空所有添加到该包裹列表的货物吗？
+          <br/>
+          Are you sure to clean out the wares list?
+        </p>
+      </div>
+      <div id="delGoodsDiv" title="请确认操作-Please Confirm Your Operation！">
+        <p>
+          您确定要从该包裹列表的删除这一货物吗？
+          <br/>
+          Are you sure to delete it from the wares list?
+        </p>
+      </div>
+      <div id="resultDialog" title="请确认打印-Please Confirm to print！">
+        <p></p>
+        <span id="result" style="display: none"></span>
+      </div>
+      <div id="printDialog" title="请确认打印-Please Confirm to print！">
+        <p></p>
+        <div>
+          必要时请牢记该信息，用于入库纪录查询，可以再次进行打印。<br/>
+          Remember the information above if necessary, it can be used to query inbound record and print it again.
+        </div>
+      </div>
+      <div id="packetDiv" title="空格详情-Space Details">
+        <table class="packetTable">
+        </table>
+      </div>
+      <div id="logoutDiv" title="注销确定-Logout Confirm！">
+        <p>您确定要注销并返回登录页面吗？</p>
+        <p>Are you sure to logout and go to the login page?</p>
+      </div>
+      <div id="loadingDialog" title="提示-Tips!">
+        <div id="shclDefault"></div>
+        <span></span>
+      </div>
+      <div id="tipDiv" title="提示-Tips！">
+        <p></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write('<script src="./js/jquery-3.2.1.min.js"><\/script>')</script>
+
+<script src="http://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>!window.jQuery.ui && document.write('<script src="./js/jquery-ui.min.js"><\/script>')</script>
+<script src="./js/main.js"></script>
+<script src="./js/jquery.shCircleLoader-min.js" type="text/javascript"></script>
+<script src="./js/inbound.js"></script>
+<script>
+</script>
+</body>
+</html>

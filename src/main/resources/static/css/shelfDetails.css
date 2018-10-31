@@ -1,0 +1,13 @@
+.button{
+    margin-bottom: 0;
+}
+#main{
+    overflow: hidden;
+}
+#mainDiv{
+    height: 95%;
+}
+.footDiv{
+    position: relative;
+    bottom: 1rem;
+}
