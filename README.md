@@ -17,7 +17,16 @@
 5.盘点，盘点分为全部位置和变动位置，全部位置是对于所有的货架每个位置都要进行盘点，这个主要是用来每个月对整个仓库进行一次检查。而变动盘点则是每天一次，主要是对每天有变动的位置进行检查，其中只要有货物进出的位置都算是一个有变动的位置，我们后台会进行标记并在变动盘点时将这一部分位置告诉盘点员。  
 6.人员管理，需要管理员权限，当账号为管理员时才能进入该页面  
 
+首页：
+![Image text](https://github.com/xjy233/warehouse/blob/master/%E6%88%AA%E5%9B%BE/home.png)
 
+查询：
+![Image text](https://github.com/xjy233/warehouse/blob/master/%E6%88%AA%E5%9B%BE/query.png)
+
+入库：
+![Image text](https://github.com/xjy233/warehouse/blob/master/%E6%88%AA%E5%9B%BE/query.png)
+
+更多请直接点击链接查看
 
 库管账号：012   
 密码：12345678a.  
